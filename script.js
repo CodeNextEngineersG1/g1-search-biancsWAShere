@@ -1,34 +1,34 @@
 /* write your script here */
 let database = [{
-  state: "California",
+  state: " Location: California",
   name: "Stanford",
-  acceptance: 4.8,
-  specializes: "medicine",
-  made: 1885
+  acceptance: "Acceptance Rate: 4.8",
+  specializes: "Specializes: Medicine",
+  made: "Made: 1885"
 },{
-  state: "Texas",
-  name: "lamarUni",
-  acceptance: 77.2,
-  specializes: "buisness",
-  made: 1923
+  state: "Location: Texas",
+  name: "LamarUni",
+  acceptance: "Acceptance Rate: 77.2",
+  specializes: "Specializes:Buisness",
+  made:"Made: 1923"
 },{
-  state: "Nebraska",
+  state: "Location: Nebraska",
   name: "Creighton",
-  acceptance: 70,
-  specializes: "science",
+  acceptance: "Acceptance Rate: 70",
+  specializes: "Specializes: Science",
   made: 1878
 },{
-  state: "Florida",
+  state: "Location: Florida",
   name: "Seminole",
-  accpetance: 64,
-  specializes: "art",
-  made: 1965
+  accpetance: "Acceptance Rate: 64",
+  specializes: "Specializes: Art",
+  made: "Made: 1965"
 },{
-  state: "Colorado",
-  name: "regisUni",
-  acceptance: 66,
-  specializes: "computerScience",
-  made: 1877
+  state: "Location: Colorado",
+  name: "RegisUni",
+  acceptance: "Acceptance Rate: 66",
+  specializes: "Specializes: ComputerScience",
+  made: "Made: 1877"
 }
 ];
 let searchBar = document.getElementById('search-bar');
@@ -37,8 +37,11 @@ let autoSuggestions = document.getElementById('auto-suggestions');
 let display = document.getElementById('display');
 
 
+
 searchBar.addEventListener("keypress",checkKey);
 searchButton.addEventListener("click",processInput);
+searchBar.addEventListener("input", getAutoSuggestions);
+
 
 function checkKey(e){
   var key = e.which || e.keyCode;
@@ -49,18 +52,48 @@ function checkKey(e){
 }
 
 function processInput(){
+let cleanedInput = searchBar.value.toLowerCase().trim();
+autoSuggestions.innerHTML= '';
+autoSuggestions.style.display = 'none';
+autoSuggestions.innerHTML = '';
+let databaseRecord = getRecord(cleanedInput);
 
+if (databaseRecord != null) {
+  displayRecord(databaseRecord);
+}else{
+  alert("No results");
 }
+  }
+
+
+
 
 function getRecord(cleanedInput){
-
-}
-
-function database(databaseRecord){
   for(let i = 0; i < database.length; i++){
     let cleanedRecordName = database[i].name.toLowerCase().trim();
     if(cleanedInput == cleanedRecordName){
       return database[i];
     }
   }
+  return null;
+}
+
+function displayRecord(databaseRecord){
+  let recordName = document.createElement ("h2");
+  recordName.innerHTML = databaseRecord.name;
+  let recordState = document.createElement("p");
+  recordState.innerHTML = databaseRecord.state;
+  let recordAcceptance = document.createElement("p");
+  recordAcceptance.innerHTML = databaseRecord.acceptance;
+  let recordSpecializes = document.createElement("p");
+  recordSpecializes.innerHTML = databaseRecord.specializes;
+  let recordMade = document.createElement("p");
+  recordMade.innerHTML = databaseRecord.made;
+
+display.appendChild(recordName);
+display.appendChild(recordMade);
+display.appendChild(recordSpecializes);
+display.appendChild(recordState);
+display.appendChild(recordAcceptance);
+
 }

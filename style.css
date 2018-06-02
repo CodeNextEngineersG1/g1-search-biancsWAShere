@@ -11,3 +11,22 @@ body {
 }
 
 /* place your styles below */
+
+#search-tools{
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+h1{
+  font-family: 'League Script'; font-size: 60px;
+}
+
+#display h2{
+  font-family: 'League Script'; font-size: 40px;
+  text-align: center;
+  text-shadow: 2.5px 1.5px grey;
+}
+
+#display p {
+  font-family: 'League Script'; font-size: 20px;
+}
